@@ -1,5 +1,6 @@
 package com.practice.efubaccount.controller;
 
+import com.practice.efubaccount.dto.ExampleDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,4 +13,17 @@ public class HttpExampleController {
         return "hello" + name;
     }
 
+    @GetMapping("/obj")
+    @ResponseBody
+    public ExampleDto hello(@RequestParam("name") String name,
+                            @RequestParam("id") Long id,
+                            @RequestParam("password") String password) {
+        ExampleDto exampleDto = new ExampleDto();
+
+        exampleDto.setName(name);
+        exampleDto.setId(id);
+        exampleDto.setPassword(password);
+
+        return exampleDto;
+    }
 }
