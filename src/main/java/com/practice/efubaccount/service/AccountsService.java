@@ -7,12 +7,13 @@ import com.practice.efubaccount.dto.request.CreateAccountRequestDto;
 import com.practice.efubaccount.domain.Account;
 import com.practice.efubaccount.domain.AccountStatus;
 import com.practice.efubaccount.repository.AccountRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AccountsService {
 
     private final AccountRepository accountRepository;
@@ -42,8 +43,7 @@ public class AccountsService {
         Account account = accountRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원을 찾을 수 없습니다."));
         account.updateBio(requestDto.getBio());
-        Account updatedAccount = accountRepository.save(account);
-        return AccountResponseDto.from(updatedAccount);
+        return AccountResponseDto.from(account);
     }
 
     // 회원 논리적 삭제 (status 변경)
@@ -52,7 +52,6 @@ public class AccountsService {
         Account account = accountRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원을 찾을 수 없습니다."));
         account.changeStatus(AccountStatus.DEACTIVATED);
-        accountRepository.save(account);
     }
 
     // 회원 물리적 삭제
