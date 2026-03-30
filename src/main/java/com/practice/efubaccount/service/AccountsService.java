@@ -7,12 +7,13 @@ import com.practice.efubaccount.dto.request.CreateAccountRequestDto;
 import com.practice.efubaccount.domain.Account;
 import com.practice.efubaccount.domain.AccountStatus;
 import com.practice.efubaccount.repository.AccountRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AccountsService {
 
     private final AccountRepository accountRepository;
