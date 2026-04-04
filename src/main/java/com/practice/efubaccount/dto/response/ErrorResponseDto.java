@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ErrorResponseDto {
-//    private String message;
-//    private int status;
+    // client에게 보여줄 에러 메시지
+    private String message;
+    private int status;
 }
