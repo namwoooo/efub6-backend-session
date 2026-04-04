@@ -1,6 +1,6 @@
-package com.practice.efubaccount.dto.response;
+package com.practice.efubaccount.account.dto.response;
 
-import com.practice.efubaccount.domain.Account;
+import com.practice.efubaccount.account.domain.Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

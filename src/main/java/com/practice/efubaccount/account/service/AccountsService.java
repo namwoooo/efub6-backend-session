@@ -1,12 +1,12 @@
-package com.practice.efubaccount.service;
+package com.practice.efubaccount.account.service;
 
-import com.practice.efubaccount.dto.response.AccountResponseDto;
-import com.practice.efubaccount.dto.response.CreateAccountResponseDto;
-import com.practice.efubaccount.dto.request.BioUpdateRequestDto;
-import com.practice.efubaccount.dto.request.CreateAccountRequestDto;
-import com.practice.efubaccount.domain.Account;
-import com.practice.efubaccount.domain.AccountStatus;
-import com.practice.efubaccount.repository.AccountRepository;
+import com.practice.efubaccount.account.dto.response.AccountResponseDto;
+import com.practice.efubaccount.account.dto.response.CreateAccountResponseDto;
+import com.practice.efubaccount.account.dto.request.BioUpdateRequestDto;
+import com.practice.efubaccount.account.dto.request.CreateAccountRequestDto;
+import com.practice.efubaccount.account.domain.Account;
+import com.practice.efubaccount.account.domain.AccountStatus;
+import com.practice.efubaccount.account.repository.AccountRepository;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

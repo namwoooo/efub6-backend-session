@@ -1,4 +1,4 @@
-package com.practice.efubaccount.domain;
+package com.practice.efubaccount.account.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

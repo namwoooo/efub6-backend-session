@@ -1,6 +1,6 @@
-package com.practice.efubaccount.controller;
+package com.practice.efubaccount.account.controller;
 
-import com.practice.efubaccount.dto.ExampleDto;
+import com.practice.efubaccount.account.dto.ExampleDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

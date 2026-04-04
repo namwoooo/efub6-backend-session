@@ -1,6 +1,6 @@
-package com.practice.efubaccount.dto.request;
+package com.practice.efubaccount.account.dto.request;
 
-import com.practice.efubaccount.domain.Account;
+import com.practice.efubaccount.account.domain.Account;
 import lombok.Getter;
 
 // 계정 생성 Request DTO

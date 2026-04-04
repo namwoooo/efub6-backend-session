@@ -1,4 +1,4 @@
-package com.practice.efubaccount.domain;
+package com.practice.efubaccount.account.domain;
 
 public enum AccountStatus {
     DEACTIVATED, ACTIVE

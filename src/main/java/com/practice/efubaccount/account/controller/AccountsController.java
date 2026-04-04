@@ -1,10 +1,10 @@
-package com.practice.efubaccount.controller;
+package com.practice.efubaccount.account.controller;
 
-import com.practice.efubaccount.dto.request.BioUpdateRequestDto;
-import com.practice.efubaccount.dto.request.CreateAccountRequestDto;
-import com.practice.efubaccount.dto.response.AccountResponseDto;
-import com.practice.efubaccount.dto.response.CreateAccountResponseDto;
-import com.practice.efubaccount.service.AccountsService;
+import com.practice.efubaccount.account.dto.request.BioUpdateRequestDto;
+import com.practice.efubaccount.account.dto.request.CreateAccountRequestDto;
+import com.practice.efubaccount.account.dto.response.AccountResponseDto;
+import com.practice.efubaccount.account.dto.response.CreateAccountResponseDto;
+import com.practice.efubaccount.account.service.AccountsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

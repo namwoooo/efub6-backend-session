@@ -1,4 +1,4 @@
-package com.practice.efubaccount.dto.request;
+package com.practice.efubaccount.account.dto.request;
 
 import lombok.Getter;
 

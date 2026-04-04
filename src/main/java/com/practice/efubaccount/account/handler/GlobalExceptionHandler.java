@@ -1,6 +1,6 @@
-package com.practice.efubaccount.handler;
+package com.practice.efubaccount.account.handler;
 
-import com.practice.efubaccount.dto.response.ErrorResponseDto;
+import com.practice.efubaccount.account.dto.response.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
