@@ -7,6 +7,8 @@ import com.practice.efubaccount.account.dto.request.CreateAccountRequestDto;
 import com.practice.efubaccount.account.domain.Account;
 import com.practice.efubaccount.account.domain.AccountStatus;
 import com.practice.efubaccount.account.repository.AccountRepository;
+import com.practice.efubaccount.global.exception.CustomException;
+import com.practice.efubaccount.global.exception.ErrorCode;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,5 +62,10 @@ public class AccountsService {
         Account account = accountRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원을 찾을 수 없습니다."));
         accountRepository.delete(account);
+    }
+
+    public Account findByAccountId(Long accountId) {
+        return accountRepository.findByAccountId(accountId)
+                .orElseThrow(()-> new CustomException(ErrorCode.ACCOUNT_NOT_FOUND));
     }
 }
