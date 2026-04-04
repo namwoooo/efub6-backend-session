@@ -10,8 +10,10 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    // 생성한 날짜 기준 전체 조회
     List<Post> findAllByOrderByCreatedAtDesc();
 
+    // 조회수 증가
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Post p SET p.viewCount = p.viewCount + 1 WHERE p.id = :postId")
     void increaseViewCount(@Param("postId") Long postId);
