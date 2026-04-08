@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 
+// 에러를 낚아채서 이 클래스로 처리
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // CustomException이 발생하면 아래처럼 처리하겠다
     @ExceptionHandler(CustomException.class)
     protected ResponseEntity<ErrorDto> handleCustomException(CustomException e, HttpServletRequest request) {
         ErrorDto errorDto = new ErrorDto(
