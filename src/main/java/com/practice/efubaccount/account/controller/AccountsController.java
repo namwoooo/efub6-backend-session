@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/accounts")   // 공통 경로는 위로 빼준다
 @RequiredArgsConstructor
 public class AccountsController {
 
@@ -31,7 +31,7 @@ public class AccountsController {
     @PostMapping
     public ResponseEntity<CreateAccountResponseDto> createAccount(@RequestBody CreateAccountRequestDto requestDto) {
         CreateAccountResponseDto responseDto = accountsService.createAccount(requestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);  // 생성되었음을 알리는 HTTP 상태 코드 + 생성된 responseDto를 body에 띄워줌
     }
 
     // 계정 프로필(자기소개) 수정: PATCH /accounts/profile/{accountId}
@@ -48,7 +48,7 @@ public class AccountsController {
     public ResponseEntity<Map<String, String>> deleteAccount(@PathVariable("accountId") Long accountId) {
         accountsService.deleteAccount(accountId);  // 상태 변경만 수행
         Map<String, String> response = new HashMap<>();
-        response.put("message", "성공적으로 탈퇴되었습니다.");
+        response.put("message", "비활성화 되었습니다");
         return ResponseEntity.ok(response);
     }
 
@@ -57,7 +57,7 @@ public class AccountsController {
     public ResponseEntity<Map<String, String>> physicalDeleteAccount(@PathVariable("accountId") Long accountId) {
         accountsService.physicalDeleteAccount(accountId);
         Map<String, String> response = new HashMap<>();
-        response.put("message", "성공적으로 탈퇴되었습니다.");
+        response.put("message", "성공적으로 탈퇴되었습니다");
         return ResponseEntity.ok(response);
     }
 }
