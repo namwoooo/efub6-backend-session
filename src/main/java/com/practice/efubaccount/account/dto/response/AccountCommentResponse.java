@@ -11,7 +11,6 @@ import lombok.Getter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// week4 실습 코드 추가
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

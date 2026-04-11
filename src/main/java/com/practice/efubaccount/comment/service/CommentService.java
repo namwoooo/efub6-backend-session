@@ -2,18 +2,12 @@ package com.practice.efubaccount.comment.service;
 
 import com.practice.efubaccount.account.dto.response.AccountCommentResponse;
 import com.practice.efubaccount.comment.dto.request.CommentRequest;
-import com.practice.efubaccount.global.exception.CustomException;
-import com.practice.efubaccount.global.exception.ErrorCode;
 import com.practice.efubaccount.post.dto.response.PostCommentResponse;
-import com.practice.efubaccount.account.dto.response.AccountCommentResponse;
 import com.practice.efubaccount.account.domain.Account;
-import com.practice.efubaccount.account.repository.AccountsRepository;
 import com.practice.efubaccount.account.service.AccountsService;
 import com.practice.efubaccount.comment.domain.Comment;
-import com.practice.efubaccount.comment.dto.request.CommentRequest;
 import com.practice.efubaccount.comment.repository.CommentRepository;
 import com.practice.efubaccount.post.domain.Post;
-import com.practice.efubaccount.post.dto.response.PostCommentResponse;
 import com.practice.efubaccount.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

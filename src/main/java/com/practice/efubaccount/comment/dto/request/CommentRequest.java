@@ -14,7 +14,6 @@ public class CommentRequest {
     private Long accountId;
     private String content;
 
-    // DRO 한 번 더 설명 : 클라이언트의 데이터 -> 실제 DB에 저장할 엔티티로 변환하기 위해 사용
     public Comment toEntity(Account account, Post post) {
         return Comment.builder()
                 .content(content)
