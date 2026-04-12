@@ -1,4 +1,4 @@
-package com.practice.efubaccount.dto;
+package com.practice.efubaccount.account.dto;
 
 public class ExampleDto {
 

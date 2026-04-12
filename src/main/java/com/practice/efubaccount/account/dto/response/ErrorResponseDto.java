@@ -1,4 +1,4 @@
-package com.practice.efubaccount.dto.response;
+package com.practice.efubaccount.account.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

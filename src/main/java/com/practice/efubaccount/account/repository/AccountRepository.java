@@ -1,6 +1,6 @@
-package com.practice.efubaccount.repository;
+package com.practice.efubaccount.account.repository;
 
-import com.practice.efubaccount.domain.Account;
+import com.practice.efubaccount.account.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
