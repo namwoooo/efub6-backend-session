@@ -1,7 +1,6 @@
 package com.practice.efubaccount.account.controller;
 
 import com.practice.efubaccount.account.dto.response.AccountCommentResponse;
-import com.practice.efubaccount.account.service.AccountsService;
 import com.practice.efubaccount.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

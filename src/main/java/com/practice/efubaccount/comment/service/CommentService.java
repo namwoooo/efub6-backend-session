@@ -4,7 +4,7 @@ import com.practice.efubaccount.account.dto.response.AccountCommentResponse;
 import com.practice.efubaccount.comment.dto.request.CommentRequest;
 import com.practice.efubaccount.post.dto.response.PostCommentResponse;
 import com.practice.efubaccount.account.domain.Account;
-import com.practice.efubaccount.account.service.AccountsService;
+import com.practice.efubaccount.account.service.AccountService;
 import com.practice.efubaccount.comment.domain.Comment;
 import com.practice.efubaccount.comment.repository.CommentRepository;
 import com.practice.efubaccount.post.domain.Post;
@@ -19,21 +19,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
 
-    private final AccountsService accountsService;
+    private final AccountService accountService;
     private final PostService postService;
     private final CommentRepository commentRepository;
 
     @Transactional
     public Long createComment(Long postId, CommentRequest request) {
         Long accountId = request.getAccountId();
-        Account writer = accountsService.findByAccountId(accountId);
+        Account writer = accountService.findByAccountId(accountId);
         Post post = postService.findByPostId(postId);
         Comment newComment = request.toEntity(writer, post);
         commentRepository.save(newComment);
         return newComment.getId();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public PostCommentResponse getPostCommentList(Long postId) {
         List<Comment> commentList = commentRepository.findAllByPostIdOrderByCreatedAt(postId);
         return PostCommentResponse.of(postId,commentList);
@@ -41,7 +41,7 @@ public class CommentService {
 
     @Transactional(readOnly=true)
     public AccountCommentResponse getAccountCommentList(Long accountId) {
-        Account account = accountsService.findByAccountId(accountId);
+        Account account = accountService.findByAccountId(accountId);
         List<Comment> commentList = commentRepository.findAllByWriterAccountIdOrderByCreatedAtDesc(accountId);
         return AccountCommentResponse.of(account, commentList);
     }
