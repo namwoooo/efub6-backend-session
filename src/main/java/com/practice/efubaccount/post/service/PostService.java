@@ -1,7 +1,7 @@
 package com.practice.efubaccount.post.service;
 
 import com.practice.efubaccount.account.domain.Account;
-import com.practice.efubaccount.account.service.AccountsService;
+import com.practice.efubaccount.account.service.AccountService;
 import com.practice.efubaccount.global.exception.CustomException;
 import com.practice.efubaccount.global.exception.ErrorCode;
 import com.practice.efubaccount.post.domain.Post;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    private final AccountsService accountService;
+    private final AccountService accountService;
 
     @Transactional
     public Long createPost(PostCreateRequest request) {
