@@ -1,7 +1,7 @@
 package com.practice.efubaccount.post.domain;
 
 import com.practice.efubaccount.account.domain.Account;
-//import com.practice.efubaccount.comment.domain.Comment;
+import com.practice.efubaccount.comment.domain.Comment;
 
 import com.practice.efubaccount.global.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -35,6 +35,9 @@ public class Post extends BaseEntity {
     private Long viewCount;
 
     // 연관관계의 Owner 설정
+    // post 하나 당 여러 개의 comment -> comment가 주인
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)  // cascade: post가 삭제되면 모든 댓글이 함께 삭제
+    private List<Comment> commentList = new ArrayList<>();
 
 
     @Builder
