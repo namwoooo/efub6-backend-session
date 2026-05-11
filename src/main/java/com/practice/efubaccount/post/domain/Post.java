@@ -1,6 +1,8 @@
 package com.practice.efubaccount.post.domain;
 
 import com.practice.efubaccount.account.domain.Account;
+import com.practice.efubaccount.comment.domain.Comment;
+
 import com.practice.efubaccount.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,16 +10,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post extends BaseEntity{
+public class Post extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)  // 회원 정보를 다대일로 연결 (누가 작성했는지)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account writer;
 
     @Column(nullable = false)
@@ -29,8 +34,13 @@ public class Post extends BaseEntity{
     @Column(nullable = false)
     private Long viewCount;
 
+    // 연관관계의 Owner 설정
+    // post 하나 당 여러 개의 comment -> comment가 주인
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)  // cascade: post가 삭제되면 모든 댓글이 함께 삭제
+    private List<Comment> commentList = new ArrayList<>();
 
-    @Builder  // 순서 상관없이 값을 받을 수 있도록 Builder 사용
+
+    @Builder
     public Post(String title, Account writer, String content) {
         this.title = title;
         this.writer = writer;

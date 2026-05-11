@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class AccountsService {
+public class AccountService {
 
     private final AccountRepository accountRepository;
 
@@ -64,8 +64,10 @@ public class AccountsService {
         accountRepository.delete(account);
     }
 
+    @Transactional(readOnly=true)
     public Account findByAccountId(Long accountId) {
         return accountRepository.findByAccountId(accountId)
                 .orElseThrow(()-> new CustomException(ErrorCode.ACCOUNT_NOT_FOUND));
     }
+
 }

@@ -20,23 +20,21 @@ public class PostController {
 
     // 게시물 생성
     @PostMapping
-    public ResponseEntity<Void> createPost(@Valid @RequestBody PostCreateRequest request) {  // 검증하기 위해 @Valid 추가
+    public ResponseEntity<Void> createPost(@Valid @RequestBody PostCreateRequest request) {
         Long id = postService.createPost(request);
-        return ResponseEntity.created(URI.create("/posts/"+id)).build();  // Alt + Enter 누르면 import 자동으로 됨
+        return ResponseEntity.created(URI.create("/posts/"+id)).build();
     }
 
     // 게시물 전체 조회
     @GetMapping
     public ResponseEntity<PostListResponse> getAllPosts(){
-        PostListResponse response = postService.getAllPosts();
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(postService.getAllPosts());
     }
 
     // 게시물 1개 조회
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponse> getPost(@PathVariable("id") Long postId) {
-        PostResponse response = postService.getPost(postId);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<PostResponse> getPost(@PathVariable("id") Long id){
+        return ResponseEntity.ok(postService.getPost(id));
     }
 
     // 게시글 수정
@@ -44,8 +42,8 @@ public class PostController {
     public ResponseEntity<Void> updatePostContent(@PathVariable("id") Long postId,
                                                   @RequestHeader("Auth-Id") Long accountId,
                                                   @Valid @RequestBody PostUpdateRequest request) {
-        postService.updatePostContent(postId, accountId, request);
-        return ResponseEntity.noContent().build();   // 204 No Content 반환
+        postService.updatePostContent(postId, request, accountId);
+        return ResponseEntity.noContent().build();
     }
 
     // 게시글 삭제
