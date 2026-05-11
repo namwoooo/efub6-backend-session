@@ -33,38 +33,23 @@ public class PostCommentController {
         return ResponseEntity.ok(commentService.getPostCommentList(postId));
     }
 
-    // 댓글 수정
-    @PatchMapping("/comments/{commentId}")
-    public ResponseEntity<CommentResponse> updateComment(@PathVariable("commentId") Long commentId,
-                                                         @RequestBody @Valid CommentUpdateRequest request,
-                                                         @RequestHeader("Auth-Id") Long accountId,
-                                                         @RequestHeader("Auth-Password") String password) {
-        CommentResponse response = commentService.updateComment(commentId, request, accountId, password);
-        return ResponseEntity.ok(response);
-    }
-
-    // 댓글 삭제
-    @DeleteMapping("/comments/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable("commentId") Long commentId,
-                                              @RequestHeader("Auth-Id") Long accountId,
-                                              @RequestHeader("Auth-Password") String password) {
-        commentService.deleteComment(commentId, accountId, password);
-        return ResponseEntity.noContent().build();
-    }
-
-    // 댓글 좋아요
-    @PostMapping("/comments/{commentId}/like")
-    public ResponseEntity<String> likeComment(@PathVariable("commentId") Long commentId,
-                                              @RequestHeader("Auth-Id") Long accountId) {
-        commentService.likeComment(commentId, accountId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("좋아요를 눌렀습니다.");
-    }
-
-    // 댓글 좋아요 취소
-    @DeleteMapping("/comments/{commentId}/like")
-    public ResponseEntity<String> unlikeComment(@PathVariable("commentId") Long commentId,
-                                                @RequestHeader("Auth-Id") Long accountId) {
-        commentService.unlikeComment(commentId, accountId);
-        return ResponseEntity.ok("좋아요가 취소되었습니다.");
-    }
+//    // 댓글 수정
+//    @PatchMapping
+//    public ResponseEntity<CommentResponse> updateComment() {
+//    }
+//
+//    // 댓글 삭제
+//    @DeleteMapping
+//    public ResponseEntity<Void> deleteComment() {
+//    }
+//
+//    // 댓글 좋아요
+//    @PostMapping
+//    public ResponseEntity<String> likeComment() {
+//    }
+//
+//    // 댓글 좋아요 취소
+//    @DeleteMapping
+//    public ResponseEntity<String> unlikeComment() {
+//    }
 }
