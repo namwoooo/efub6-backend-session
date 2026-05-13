@@ -3,6 +3,8 @@ package com.practice.efubaccount.global.exception;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+// 프로젝트 내부에서 생기는 에러를 모두 모아놓은 곳
+
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {

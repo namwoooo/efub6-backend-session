@@ -12,7 +12,7 @@ public class PostCreateRequest{
     @NotNull
     private Long accountId;
 
-    @NotBlank(message = "제목을 입력해야 합니다.")
+    @NotBlank(message = "제목을 입력해야 합니다.")  // message는 에러나면 띄워줄 메시지
     private String title;
 
     @Size(min=5, max=500, message = "내용은 5자이상 500자이하로 입력해야합니다.")

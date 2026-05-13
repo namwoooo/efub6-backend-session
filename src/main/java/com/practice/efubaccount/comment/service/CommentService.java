@@ -45,7 +45,7 @@ public class CommentService {
 
     @Transactional(readOnly = true)
     public PostCommentResponse getPostCommentList(Long postId) {
-        List<Comment> commentList = commentRepository.findAllByPostIdOrderByCreatedAt(postId);
+        List<Comment> commentList = commentRepository.findAllByPostIdOrderByCreatedAtDesc(postId);
         return PostCommentResponse.of(postId,commentList);
     }
 

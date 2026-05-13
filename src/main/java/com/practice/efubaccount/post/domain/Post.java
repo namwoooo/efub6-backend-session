@@ -1,6 +1,5 @@
 package com.practice.efubaccount.post.domain;
 
-// week4 import 문 추가 for 연관관계 매핑
 import com.practice.efubaccount.account.domain.Account;
 import com.practice.efubaccount.comment.domain.Comment;
 
@@ -11,7 +10,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-// week4 import 문 추가
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +34,11 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private Long viewCount;
 
-    // week4 연관관계의 Owner 설정
-    // post랑 comment의 관계에서 누가 주인인지 정하고 부모 (post)가 자식 (comment)의 생명 주기를 관리하도록 설정한 코드
-    @OneToMany(mappedBy="post", cascade = CascadeType.ALL, orphanRemoval = true)
+    // 연관관계의 Owner 설정
+    // post 하나 당 여러 개의 comment -> comment가 주인
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)  // cascade: post가 삭제되면 모든 댓글이 함께 삭제
     private List<Comment> commentList = new ArrayList<>();
+
 
     @Builder
     public Post(String title, Account writer, String content) {

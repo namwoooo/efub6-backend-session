@@ -17,7 +17,6 @@ public class HttpExampleController {
                             @RequestParam("id") Long id,
                             @RequestParam("password") String password) {
         ExampleDto exampleDto = new ExampleDto();
-
         exampleDto.setName(name);
         exampleDto.setId(id);
         exampleDto.setPassword(password);

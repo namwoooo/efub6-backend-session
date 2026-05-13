@@ -12,14 +12,17 @@ import lombok.*;
 public class CommentRequest {
     // 댓글 작성자 ID, 댓글 내용 전달받기 위한 필드 정의
     private Long accountId;
-    private String content;
+    private String comment;
 
+    // 연관관계를 설정했기 때문에 account와 post에서도 가져와서 사용 가능
     public Comment toEntity(Account account, Post post) {
+        // dto를 실제 db에 저장할 entity로 만드는 method
         return Comment.builder()
-                .content(content)
+                .content(comment)
                 .writer(account)
                 .post(post)
                 .build();
     }
+
 
 }
