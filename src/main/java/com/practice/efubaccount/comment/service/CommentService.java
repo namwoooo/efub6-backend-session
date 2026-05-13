@@ -15,6 +15,7 @@ import com.practice.efubaccount.comment.domain.Comment;
 import com.practice.efubaccount.comment.repository.CommentRepository;
 import com.practice.efubaccount.post.domain.Post;
 import com.practice.efubaccount.post.service.PostService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,62 @@ public class CommentService {
         Account account = accountService.findByAccountId(accountId);
         List<Comment> commentList = commentRepository.findAllByWriterAccountIdOrderByCreatedAtDesc(accountId);
         return AccountCommentResponse.of(account, commentList);
+    }
+
+    // 댓글 수정
+    @Transactional
+    public CommentResponse updateComment(Long commentId, CommentUpdateRequest request, Long accountId) {
+        Comment comment = findByCommentId(commentId);
+        Account account = accountService.findByAccountId(accountId);
+        authorizeCommentWriter(comment, account);
+        comment.updateContent(request.getContent());
+        return CommentResponse.of(comment);
+    }
+
+    // 댓글 삭제
+    @Transactional
+    public void deleteComment(Long commentId, Long accountId) {
+        Comment comment = findByCommentId(commentId);
+        Account account = accountService.findByAccountId(accountId);
+        authorizeCommentWriter(comment, account);
+        commentRepository.delete(comment);
+    }
+
+    // 댓글 좋아요 생성
+    @Transactional
+    public void likeComment(Long commentId, Long accountId) {
+        Comment comment = findByCommentId(commentId);
+        Account account = accountService.findByAccountId(accountId);
+        if (commentLikeRepository.existsByCommentAndAccount(comment, account)) {
+            throw new CustomException(ErrorCode.LIKE_ALREADY_EXISTS);
+        }
+
+        // 좋아요 생성
+        CommentLike like = CommentLike.builder()
+                .comment(comment)
+                .account(account)
+                .build();
+        commentLikeRepository.save(like);  // 좋아요 저장
+    }
+
+    // 댓글 좋아요 삭제
+    @Transactional
+    public void unlikeComment(Long commentId, Long accountId) {
+        Comment comment = findByCommentId(commentId);
+        Account account = accountService.findByAccountId(accountId);
+        CommentLike like = commentLikeRepository.findByCommentAndAccount(comment, account)
+                .orElseThrow(() -> new CustomException(ErrorCode.LIKE_NOT_FOUND));
+        commentLikeRepository.delete(like);
+    }
+
+    private Comment findByCommentId (Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
+    }
+
+    private void authorizeCommentWriter(Comment comment, Account account) {
+        if (!comment.getWriter().equals(account)) {
+            throw new CustomException(ErrorCode.COMMENT_ACCOUNT_MISMATCH);
+        }
     }
 }

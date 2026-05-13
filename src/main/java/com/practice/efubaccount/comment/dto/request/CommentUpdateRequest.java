@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentUpdateRequest {
-    @NotBlank(message = "댓글 내용은 필수입니다.")
+    @NotBlank(message = "댓글 내용은 필수입니다.")   // 유효성 검사 필요
     private String content;
 }
