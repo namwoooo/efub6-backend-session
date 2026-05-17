@@ -4,6 +4,7 @@ import com.practice.efubaccount.follow.dto.FollowListResponse;
 import com.practice.efubaccount.follow.dto.FollowStatusResponse;
 import com.practice.efubaccount.follow.service.FollowService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class FollowController {
     public ResponseEntity<FollowStatusResponse> follow(@RequestHeader("Auth-Id") Long requesterId,
                                                        @PathVariable("targetId") Long targetId) {
         FollowStatusResponse response = followService.follow(requesterId, targetId);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     // 팔로우 취소
