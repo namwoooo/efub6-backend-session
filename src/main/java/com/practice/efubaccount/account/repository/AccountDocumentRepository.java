@@ -1,7 +1,10 @@
 package com.practice.efubaccount.account.repository;
 
 
-//TODO: MongoRepository 상속
-public interface AccountDocumentRepository {
+import com.practice.efubaccount.account.domain.AccountDocument;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+// MongoRepository 상속
+public interface AccountDocumentRepository extends MongoRepository<AccountDocument, String> {
 
 }
