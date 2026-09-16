@@ -10,6 +10,13 @@ public class SecurityUtils {
      */
 
     //TODO: 현재 인증된 사용자 email을 반환하는 메서드 작성.
+    public static String getCurrentUserEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        if (authentication == null || authentication.getName() == null) {
+            return null;
+        }
+        return authentication.getName();
+    }
 }
 
