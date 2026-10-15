@@ -14,6 +14,26 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+
+    // 1단계: 정렬·페이징된 id만 조회 (join 없음 → 인덱스 사용)
+    @Query(
+            value = "SELECT p.id FROM Post p",
+            countQuery = "SELECT COUNT(p) FROM Post p"
+    )
+    Page<Long> findPostIds(Pageable pageable);
+
+    // 2단계: id 20개에 해당하는 목록 데이터 조회
+    @Query("""
+        SELECT new com.practice.efubaccount.post.dto.summary.PostSummary(
+            p.id, w.nickname, p.title, p.viewCount
+        )
+        FROM Post p
+        JOIN p.writer w
+        WHERE p.id IN :ids
+        ORDER BY p.createdAt DESC, p.id DESC
+        """)
+    List<PostSummary> findPostSummariesByIds(@Param("ids") List<Long> ids);
+
     // @Query와 findPostSummaries 메서드
     // 게시글 목록에 필요한 4개 필드만 조회하는 Page DTO projection을 작성한다.
     // Pageable은 Service에서 전달하고, 전체 개수는 별도 countQuery로 조회한다.
