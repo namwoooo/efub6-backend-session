@@ -54,7 +54,7 @@ on:
         default: "0.1"
         type: string
   push:
-    branches: [week13]
+    branches: [week13-2]
     paths:
       - "src/main/**"
       - "src/test/**"
